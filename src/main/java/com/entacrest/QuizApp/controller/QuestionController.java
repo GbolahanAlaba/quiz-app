@@ -1,4 +1,4 @@
-package controller;
+package com.entacrest.QuizApp.controller;
 
 
 import com.entacrest.QuizApp.model.Question;
