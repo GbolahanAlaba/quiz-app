@@ -22,13 +22,18 @@ public class QuizService {
     QuestionDao questionDao;
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
+        try{
+            List<Question> question = questionDao.findRandomQuestionsByCategory(category, numQ);
+            Quiz quiz = new Quiz();
+            quiz.setTitle(title);
+            quiz.setQuestions(question);
+            quizDao.save(quiz);
 
-        List<Question> question = questionDao.findRandomQuestionsByCategory(category, numQ);
-        Quiz quiz = new Quiz();
-        quiz.setTitle(title);
-        quiz.setQuestions(question);
-        quizDao.save(quiz);
+            return new ResponseEntity<>("success", HttpStatus.CREATED);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Error in connection...", HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
     }
 }
