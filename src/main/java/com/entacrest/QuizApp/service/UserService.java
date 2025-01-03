@@ -26,6 +26,9 @@ public class UserService {
 
     public ResponseEntity<?> registerUser(User user, String rawPassword) {
         try{
+            if (user.getPassword().isBlank() || user.getEmail().isBlank()) {
+                return new ResponseEntity<>("Password or Email is not provided", HttpStatus.BAD_REQUEST);
+            }
             String encodedPassword = passwordEncoder.encode(rawPassword);
             user.setPassword(encodedPassword);
             userDao.save(user);
