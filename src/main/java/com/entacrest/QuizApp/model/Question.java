@@ -1,8 +1,9 @@
 package com.entacrest.QuizApp.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-//@Data
+@Data
 @Entity
 public class Question {
 
